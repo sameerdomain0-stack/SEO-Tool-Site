@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SEO Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .csb::-webkit-scrollbar { width: 8px; }
+        .csb::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+        .csb::-webkit-scrollbar-track { background-color: #f1f5f9; }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <!-- AD PLACEMENT -->
+    <div class="max-w-4xl mx-auto mb-6 p-4 bg-white rounded-xl shadow-lg border border-gray-100">
+        <h2 class="text-lg font-semibold text-center text-gray-700 mb-3">Advertisement</h2>
+        <div class="text-center p-4 rounded-lg bg-gray-50">
+            <!-- START OF USER'S ADSCRIPT -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6373504147188876"
+                 crossorigin="anonymous"></script>
+            <!-- END OF USER'S ADSCRIPT -->
+            
+            <!-- AdSense Ad Unit Placeholder (<ins> tag) -->
+            <div class="border-2 border-dashed border-indigo-300 p-8 rounded-lg text-indigo-700 text-sm font-semibold bg-indigo-100 mb-2">
+                ⚠️ **Insert your specific AdSense Ad Unit (<ins> tag) here** for the ad to show.
+            </div>
+
+            <!-- Configuration/Verification Code Placeholder -->
+            <!-- The following code was provided by the user and is placed here as a comment for reference. -->
+            <!-- Google.com, pub-6373504147188876, DIRECT, f08c47fec0942fa0 -->
+        </div>
+    </div>
+    <!-- END AD PLACEMENT -->
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">
+                <span class="text-indigo-600">AI SEO</span> Content Creator
+            </h1>
+            <p class="text-gray-500 text-sm sm:text-base">Generate optimized Titles, Descriptions, and Tags instantly.</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-gray-200 mb-6" id="tabs">
+            <button class="tab-button flex-1 py-3 text-sm sm:text-base font-medium text-center transition-colors duration-200" onclick="switchTab('title')" data-tab="title">Title Generator</button>
+            <button class="tab-button flex-1 py-3 text-sm sm:text-base font-medium text-center transition-colors duration-200 text-gray-500 hover:text-indigo-600 border-b-2 border-transparent" onclick="switchTab('description')" data-tab="description">Description Generator</button>
+            <button class="tab-button flex-1 py-3 text-sm sm:text-base font-medium text-center transition-colors duration-200 text-gray-500 hover:text-indigo-600 border-b-2 border-transparent" onclick="switchTab('tags')" data-tab="tags">Tag Generator</button>
+        </div>
+
+        <!-- Tool Sections -->
+        <div id="tool-sections">
+
+            <!-- Title Generator -->
+            <div id="title-section" class="tool-section p-6 border border-gray-100 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 text-indigo-700">SEO Title Generator</h2>
+                <p class="text-sm text-gray-500 mb-4">Under 60 characters for best visibility.</p>
+                <div class="mb-4"><input type="text" id="title-input" placeholder="e.g., Best long-tail keywords for baking blogs" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"></div>
+                <button onclick="generateContent('title')" id="title-button" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200 disabled:opacity-50 flex items-center justify-center">
+                    <span id="title-loader" class="hidden animate-spin h-5 w-5 mr-3 border-2 border-white border-t-transparent rounded-full"></span><span id="title-text">Generate Title</span>
+                </button>
+                <div id="title-output-area" class="mt-6"></div>
+            </div>
+
+            <!-- Description Generator -->
+            <div id="description-section" class="tool-section hidden p-6 border border-gray-100 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 text-indigo-700">Meta Description Generator</h2>
+                <p class="text-sm text-gray-500 mb-4">Under 160 characters for engagement.</p>
+                <div class="mb-4"><textarea id="description-input" rows="3" placeholder="e.g., A comprehensive guide on setting up a home solar power system in 2025..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"></textarea></div>
+                <button onclick="generateContent('description')" id="description-button" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200 disabled:opacity-50 flex items-center justify-center">
+                    <span id="description-loader" class="hidden animate-spin h-5 w-5 mr-3 border-2 border-white border-t-transparent rounded-full"></span><span id="description-text">Generate Description</span>
+                </button>
+                <div id="description-output-area" class="mt-6"></div>
+            </div>
+
+            <!-- Tag Generator -->
+            <div id="tags-section" class="tool-section hidden p-6 border border-gray-100 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 text-indigo-700">Keyword Tag Generator</h2>
+                <p class="text-sm text-gray-500 mb-4">Generate 5-8 highly relevant keywords/tags.</p>
+                <div class="mb-4"><input type="text" id="tags-input" placeholder="e.g., Sustainable minimalist wallets for men" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"></div>
+                <button onclick="generateContent('tags')" id="tags-button" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-200 disabled:opacity-50 flex items-center justify-center">
+                    <span id="tags-loader" class="hidden animate-spin h-5 w-5 mr-3 border-2 border-white border-t-transparent rounded-full"></span><span id="tags-text">Generate Tags</span>
+                </button>
+                <div id="tags-output-area" class="mt-6"></div>
+            </div>
+
+        </div>
+
+        <div id="status-message" class="fixed top-4 right-4 p-3 rounded-lg shadow-lg text-white transition-opacity duration-300 z-50 opacity-0"></div>
+
+    </div>
+    
+    <script>
+        const aK = ""; 
+        // Use the base URL without the ?key= to ensure the environment handles the auth token injection
+        const aU = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent`;
+
+        // UI Helpers
+        window.switchTab = (tId) => {
+            document.querySelectorAll('.tool-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`${tId}-section`).classList.remove('hidden');
+            document.querySelectorAll('.tab-button').forEach(b => {
+                const iA = b.getAttribute('data-tab') === tId;
+                b.className = `tab-button flex-1 py-3 text-sm sm:text-base font-medium text-center transition-colors duration-200 ${iA ? 'text-indigo-600 border-indigo-600 border-b-2' : 'text-gray-500 hover:text-indigo-600 border-b-2 border-transparent'}`;
+            });
+        };
+        document.addEventListener('DOMContentLoaded', () => switchTab('title'));
+
+        // Core AI Function
+        window.generateContent = async (tT) => {
+            const iE = document.getElementById(`${tT}-input`), oA = document.getElementById(`${tT}-output-area`), b = document.getElementById(`${tT}-button`), l = document.getElementById(`${tT}-loader`), tE = document.getElementById(`${tT}-text`);
+            const input = iE.value.trim();
+            if (!input) { oA.innerHTML = `<div class="p-3 bg-red-100 text-red-700 rounded-lg font-medium">Enter a topic.</div>`; return; }
+
+            b.disabled = true; l.classList.remove('hidden'); tE.textContent = 'Generating...'; oA.innerHTML = '';
+            
+            let sP = "", tN = tT.charAt(0).toUpperCase() + tT.slice(1);
+            let uQ = `Generate SEO content for the following topic: "${input}"`;
+
+            switch (tT) {
+                case 'title': sP = "Act as an expert SEO copywriter. Generate a single, highly compelling, and click-worthy web page title. The title must be highly relevant and under 60 characters. Output only the title text."; break;
+                case 'description': sP = "Act as an expert SEO metadata writer. Generate a single, highly engaging, and informative meta description for a search engine results page (SERP). The description must be under 160 characters and summarize the page content effectively. Output only the description text."; break;
+                case 'tags': sP = "Act as an expert keyword researcher. Generate a list of 5-8 highly relevant, long-tail, and high-volume search keywords/tags related to the user's topic. Present them as a single, comma-separated list of keywords. Output only the comma-separated list."; break;
+            }
+
+            const pL = { contents: [{ parts: [{ text: uQ }] }], tools: [{ "google_search": {} }], systemInstruction: { parts: [{ text: sP }] } };
+            let r = null, a = 0, d = 1000;
+            
+            // Retry loop
+            while (a < 5) {
+                try {
+                    r = await fetch(aU, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(pL) });
+                    if (r.ok) break;
+                    
+                    if (r.status === 429 || r.status >= 500) { a++; if (a < 5) { await new Promise(res => setTimeout(res, d)); d *= 2; }
+                    } else { throw new Error(`API returned non-retryable status: ${r.status}`); }
+                } catch (e) {
+                    console.error(`[${tN}]: Fetch failed:`, e.message);
+                    if (e.message.includes('non-retryable status') && r) { 
+                        const eT = await r.text(); 
+                        console.error(`[${tN}]: Final API Response Status ${r.status}. Body:`, eT); 
+                    }
+                    a++; 
+                    if (a >= 5 || e.message.includes('non-retryable')) break;
+                    await new Promise(res => setTimeout(res, d)); d *= 2;
+                }
+            }
+
+            if (!r || !r.ok) { 
+                oA.innerHTML = `<div class="p-3 bg-red-100 text-red-700 rounded-lg">Error: AI service unavailable. Please check the Console (F12) for detailed error messages.</div>`;
+            } else {
+                try {
+                    const res = await r.json();
+                    const c = res.candidates?.[0];
+                    let gT = "No content generated.", s = [];
+
+                    if (c && c.content?.parts?.[0]?.text) {
+                        gT = c.content.parts[0].text.trim();
+                        const g = c.groundingMetadata;
+                        if (g && g.groundingAttributions) { s = g.groundingAttributions.map(a => ({ uri: a.web?.uri, title: a.web?.title })).filter(s => s.uri); }
+                    } else { gT = "The AI returned an empty response. Try a different topic."; }
+                    displayResult(tT, gT, s);
+                } catch (e) {
+                    console.error(`[${tN}]: JSON error:`, e);
+                    oA.innerHTML = `<div class="p-3 bg-red-100 text-red-700 rounded-lg">An unexpected error occurred.</div>`;
+                }
+            }
+
+            b.disabled = false; l.classList.add('hidden'); tE.textContent = `Generate ${tN}`;
+        };
+
+        // Helper Functions (Minimal)
+        function displayResult(tT, t, s) {
+            const oA = document.getElementById(`${tT}-output-area`);
+            let h = '', cC = t.length;
+            const mL = (tT === 'title' ? 60 : tT === 'description' ? 160 : null);
+            let cC_Cl = 'text-green-600';
+
+            if (mL) {
+                if (cC > mL) cC_Cl = 'text-red-600';
+                else if (cC > mL - 15) cC_Cl = 'text-yellow-600';
+            }
+            
+            let rD;
+            if (tT === 'tags') {
+                const tH = t.split(',').map(t => t.trim()).filter(t => t.length).map(t => `<span class="inline-block bg-gray-100 text-gray-800 text-sm font-medium px-4 py-1 rounded-full mr-2 mb-2">${t}</span>`).join('');
+                rD = `<div class="p-4 bg-gray-50 rounded-lg shadow-inner"><h3 class="font-bold text-lg text-indigo-800 mb-3">Suggested Keywords:</h3><div class="flex flex-wrap">${tH}</div></div>`;
+            } else {
+                const [tEl, tI] = [tT === 'title' ? 'Title' : 'Description', tT === 'title' ? '⭐' : '📄'];
+                const cW = cC > mL ? 'Title is too long.' : '';
+
+                rD = `
+                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-xl mb-4">
+                        <h3 class="font-bold text-lg text-indigo-800 mb-2">${tI} Generated ${tEl}:</h3>
+                        <p class="text-gray-900 break-words whitespace-pre-wrap p-3 bg-indigo-50 rounded-md border border-indigo-200 text-lg">${t}</p>
+                        ${mL ? `<p class="mt-2 text-sm text-right"><span class="font-semibold ${cC_Cl}">${cC}</span> / ${mL} chars</p>
+                            ${cC > mL ? `<p class="text-xs text-red-500 text-right mt-1 font-medium">${cW}</p>` : ''}` : ''}
+                        
+                        <div class="mt-4 flex space-x-2">
+                             <button onclick="copyToClipboard('${t.replace(/'/g, "\\'")}')" class="flex-1 bg-green-500 text-white text-sm py-2 rounded-lg hover:bg-green-600 transition duration-150">Copy</button>
+                             <button onclick="document.getElementById('${tT}-input').value = \`${t.replace(/`/g, "\\`")}\`" class="flex-1 bg-yellow-500 text-white text-sm py-2 rounded-lg hover:bg-yellow-600 transition duration-150">Use as Input</button>
+                        </div>
+                    </div>
+                `;
+            }
+            h += rD;
+            if (s.length > 0) {
+                const sL = s.map(s => `<li class="mb-1 text-sm text-gray-600"><a href="${s.uri}" target="_blank" class="text-indigo-500 hover:text-indigo-700 hover:underline flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2a1 1 0 100-2h-2z" /><path d="M14 8a1 1 0 011 1v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a1 1 0 011-1h6a1 1 0 110 2H4v5h12V9a1 1 0 011-1h-3z" /></svg>${s.title || s.uri}</a></li>`).join('');
+                h += `<div class="mt-6 border-t pt-4 border-gray-200"><h4 class="text-base font-semibold text-gray-700 mb-3">Sources:</h4><ul class="list-none pl-0 max-h-40 overflow-y-auto csb">${sL}</ul></div>`;
+            } else if (t !== "No content generated.") {
+                h += `<div class="mt-6 border-t pt-4 border-gray-200"><p class="text-sm text-gray-500">No external search grounding used.</p></div>`;
+            }
+
+            oA.innerHTML = h;
+        }
+
+        window.copyToClipboard = (t) => {
+            const i = document.createElement('textarea'); i.value = t; document.body.appendChild(i); i.select();
+            try { const s = document.execCommand('copy'); alertMessage(s ? 'Text Copied!' : 'Copy Failed!', s ? 'bg-green-600' : 'bg-red-600'); }
+            catch (e) { alertMessage('Copy Failed!', 'bg-red-600'); }
+            document.body.removeChild(i);
+        };
+
+        function alertMessage(m, cC) {
+            let mB = document.getElementById('status-message');
+            mB.textContent = m;
+            mB.className = `fixed top-4 right-4 p-3 rounded-lg shadow-lg text-white transition-opacity duration-300 z-50 ${cC} opacity-100`;
+            clearTimeout(mB.timer);
+            mB.timer = setTimeout(() => { mB.classList.remove('opacity-100'); mB.classList.add('opacity-0'); }, 3000);
+        }
+    </script>
+</body>
+</html>
+
+
